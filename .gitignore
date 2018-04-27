@@ -1,0 +1,7 @@
+.*
+!.gitignore
+lib_managed/**
+src/main/scala/common/**
+project/**
+submission/**
+target/**
