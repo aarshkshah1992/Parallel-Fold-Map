@@ -6,7 +6,7 @@ http://eed3si9n.com/herding-cats/using-monoids-to-fold.html
 
 A foldMap is simply a map followed by a fold. In order to do a parallel foldMap, we first divide the Foldable into chunks 
 equal to the number of cores on the machine. The idea of chunking a type is represented by the Chunkable type class. 
-We then execute foldMap on each chunk in parallel across the cores using Futures. If a single Future fails, we accumulate errors across all futures. If all Futures are successful, we again fold over the values returned by each Future to arrive at the our output I wrote a blog post explaining how error accumulation from a collection of Futures works:
+We then execute foldMap on each chunk in parallel across the cores using Futures. If a single Future fails, we accumulate errors across all futures. If all Futures are successful, we fold over the values returned by each Future to arrive at our output I wrote a blog post explaining how error accumulation from a collection of Futures works:
 
 https://medium.com/musings-on-functional-programming/error-accumulation-with-collection-of-futures-82fb4da47466
 
@@ -23,17 +23,17 @@ final def parallelFoldMap[A, B: Monoid](fa: F[A])(func: A => B)(implicit chunkab
 ```
 
 The following type classes:
-*Monoid
-*Foldable
-*Chunkable
+* Monoid
+* Foldable
+* Chunkable
 
 and the following type class instances :
-*A Monoid to merge sorted IndexedSeq
-*A Monoid to merge two Maps provided there exists a Monoid to merge their values
-*A Monoid to merge two IndexedSeqs
-*A Foldable for IndexedSeq
-*Integer addition Monoid
-*A Chunkable for IndexedSeq
+* A Monoid to merge two sorted IndexedSeqs
+* A Monoid to merge two Maps provided there exists a Monoid to merge their values
+* A Monoid to merge two IndexedSeqs
+* A Foldable for IndexedSeq
+* Integer addition Monoid
+* A Chunkable for IndexedSeq
  
 are already provided in the library.
 
