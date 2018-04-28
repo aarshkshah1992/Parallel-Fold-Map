@@ -4,14 +4,12 @@ This tutorial explains how to fold a generic type with the Foldable and Monoid t
 
 http://eed3si9n.com/herding-cats/using-monoids-to-fold.html
 
-A foldMap is simply a map followed by a fold. In order to do a parallel foldMap, we first divide the Foldable into chunks 
-equal to the number of cores on the machine. The idea of chunking a type is represented by the Chunkable type class. 
-We then execute foldMap on each chunk in parallel across the cores using Futures. If a single Future fails, we accumulate errors across all futures. If all Futures are successful, we fold over the values returned by each Future to arrive at our output I wrote a blog post explaining how error accumulation from a collection of Futures works:
+To execute a parallel foldMap, we first divide the Foldable into chunks equal to the number of cores on the machine using the
+Chunkable type class. We then execute foldMap on each chunk in parallel using Futures and the Implicit global Execution Context. If atlease one Future fails, we accumulate errors across all Futures. If all Futures are successful, we fold over the values returned by each Future to arrive at our output. I wrote a blog post explaining how error accumulation from a collection of Futures works:
 
 https://medium.com/musings-on-functional-programming/error-accumulation-with-collection-of-futures-82fb4da47466
 
-Thus, parallelFoldMap returns either a List of errors or the result. This is encoded by the Either[List[Throwable], B]
-where B is the result type.
+Thus, parallelFoldMap returns either a List of errors or the result. 
 ```
 trait Foldable[F[_]] {
 ...
