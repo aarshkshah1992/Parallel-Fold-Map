@@ -1,4 +1,6 @@
-A simple library to do a parallel foldMap/map-reduce over multiple cores with error accumulation semantics.
+A simple library to do a parallel foldMap/map-reduce over multiple cores with error accumulation semantics. The only dependency it has is on [ScalaTest](http://www.scalatest.org) for the tests. The AsyncFunSuite is particularly helpful in testing asynchronous code that uses Futures.
+
+**How it works**
 
 This tutorial explains how to fold a generic type with the Foldable and Monoid type classes:
 
@@ -19,6 +21,8 @@ final def parallelFoldMap[A, B: Monoid](fa: F[A])(func: A => B)(implicit chunkab
   Future[Either[List[Result], B]]
 }
 ```
+
+**Type classes and instances included in the library**
 
 The following type classes:
 * Monoid
