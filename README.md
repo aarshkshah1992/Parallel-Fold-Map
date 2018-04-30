@@ -39,7 +39,6 @@ and the following type class instances :
  
 are already provided in the library.
 
-I implemented my own type classes and instances rather than using existing ones from cats or scalaz to get a better
-understanding of how they work. Some examples on how to use the library can be found in the **exampleapps** package.
+I implemented my own type classes and instances to get a better understanding of how they work. Some examples on how to use the library can be found in the **exampleapps** package.
 
 Please feel free to add your type classes/instances and examples.
